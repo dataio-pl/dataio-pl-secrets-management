@@ -4,6 +4,12 @@ The repository contains the Terraform code which creates the OIDC Provider, IAM 
 
 This might be used by the GitHub Actions to create the secrets in AWS Secrets Manager and then use them in the deployment process.
 
+## GitHub Actions Usage
+
+To run the GitHub Actions Pipeline you should first create the **Repository Secret**. Then use the **Actions** button (blocked in this repository) and fill the form with the following content as in the example below:
+
+![GitHub Actions User Access](./assets/githubactions_useraccess.png)
+
 ## Terraform Usage
 
 ```hcl
@@ -83,8 +89,3 @@ No modules.
 | <a name="output_oidc_role_path"></a> [oidc\_role\_path](#output\_oidc\_role\_path) | Path of IAM role |
 | <a name="output_oidc_role_unique_id"></a> [oidc\_role\_unique\_id](#output\_oidc\_role\_unique\_id) | Unique ID of IAM role |
 
-## GitHub Actions Usage
-
-To run the GitHub Actions Pipeline you should first create the ** Repository Secret**. Then use the **Actions** button (blocked in this repository) and fill the form with the following content as in the example below:
-
-![GitHub Actions User Access](./assets/githubactions_useraccess.png)
