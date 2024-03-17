@@ -11,7 +11,7 @@ variable "create" {
 variable "url" {
   description = "The URL of the identity provider."
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "client_id_list" {

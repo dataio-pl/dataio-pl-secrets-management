@@ -1,10 +1,11 @@
-data "aws_partition" "current" {}
 data "aws_caller_identity" "current" {}
+data "aws_partition" "current" {}
 
 locals {
-  account_id   = data.aws_caller_identity.current.account_id
-  partition    = data.aws_partition.current.partition
-  provider_url = replace(var.provider_url, "https://", "")
+  create_provider = var.create && var.url != null
+  account_id      = data.aws_caller_identity.current.account_id
+  partition       = data.aws_partition.current.partition
+  provider_url    = replace(var.provider_url, "https://", "")
 }
 
 ####################################################
@@ -12,13 +13,13 @@ locals {
 ####################################################
 
 data "tls_certificate" "this" {
-  count = var.create ? 1 : 0
+  count = local.create_provider ? 1 : 0
 
   url = var.url
 }
 
 resource "aws_iam_openid_connect_provider" "this" {
-  count = var.create ? 1 : 0
+  count = local.create_provider ? 1 : 0
 
   url             = var.url
   client_id_list  = coalescelist(var.client_id_list, ["sts.${data.aws_partition.current.dns_suffix}"])
