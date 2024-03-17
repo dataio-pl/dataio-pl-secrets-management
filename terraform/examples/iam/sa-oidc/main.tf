@@ -12,7 +12,6 @@ module "iam-oidc" {
   ]
   policy_name   = "eso-dev-eks-policy"
   role_name     = "eso-dev-eks-role"
-
 }
 
 provider "aws" {

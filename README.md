@@ -10,11 +10,11 @@ To run the GitHub Actions Pipeline you should first create the **Repository Secr
 
 ![GitHub Actions User Access](./assets/githubactions_useraccess.png)
 
-## Terraform IAM
+## Terraform IAM for GitHub
 
 ```hcl
 module "secrets_management" {
-  source = "terraform/modules/iam"
+  source = "terraform/modules/iam-github-oidc"
 
   create = true
 
@@ -53,5 +53,25 @@ image:
   pullPolicy: IfNotPresent
 EOF
 ]
+}
+```
+
+## Terraform IAM For External Secret
+
+```hcl
+module "iam-oidc" {
+  source = "terraform/modules/iam-role-oidc"
+
+  create = true
+
+  url           = "oidc.eks.eu-central-1.amazonaws.com/id/EEC311A801556031086B6AE005683618"
+  oidc_subjects = [
+    "system:serviceaccount:utils:eso-sa"
+  ]
+  secret_arns   = [
+    "arn:aws:secretsmanager:eu-central-1:962491557115:secret:aws/dev/rds/access*"
+  ]
+  policy_name   = "eso-dev-eks-policy"
+  role_name     = "eso-dev-eks-role"
 }
 ```
