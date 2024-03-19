@@ -69,7 +69,7 @@ module "iam-oidc" {
     "system:serviceaccount:utils:eso-sa"
   ]
   secret_arns   = [
-    "arn:aws:secretsmanager:eu-central-1:962491557115:secret:aws/dev/rds/access*"
+    "arn:aws:secretsmanager:eu-central-1:962491557115:secret:aws/dev/user/access*"
   ]
   policy_name   = "eso-dev-eks-policy"
   role_name     = "eso-dev-eks-role"
